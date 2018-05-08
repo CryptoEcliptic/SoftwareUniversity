@@ -1,0 +1,7 @@
+C:\Users\Name\source\repos\07DictionariesLampdaAndLinqEXERCISES\09SerbianUnleashed\obj\Debug\09SerbianUnleashed.csprojResolveAssemblyReference.cache
+C:\Users\Name\source\repos\07DictionariesLampdaAndLinqEXERCISES\09SerbianUnleashed\obj\Debug\09SerbianUnleashed.csproj.CoreCompileInputs.cache
+C:\Users\Name\source\repos\07DictionariesLampdaAndLinqEXERCISES\09SerbianUnleashed\bin\Debug\09SerbianUnleashed.exe.config
+C:\Users\Name\source\repos\07DictionariesLampdaAndLinqEXERCISES\09SerbianUnleashed\bin\Debug\09SerbianUnleashed.exe
+C:\Users\Name\source\repos\07DictionariesLampdaAndLinqEXERCISES\09SerbianUnleashed\bin\Debug\09SerbianUnleashed.pdb
+C:\Users\Name\source\repos\07DictionariesLampdaAndLinqEXERCISES\09SerbianUnleashed\obj\Debug\09SerbianUnleashed.exe
+C:\Users\Name\source\repos\07DictionariesLampdaAndLinqEXERCISES\09SerbianUnleashed\obj\Debug\09SerbianUnleashed.pdb
