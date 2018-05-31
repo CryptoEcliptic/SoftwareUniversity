@@ -1,0 +1,11 @@
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\bin\Debug\netcoreapp2.0\07AndreyAndBilliard.deps.json
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\bin\Debug\netcoreapp2.0\07AndreyAndBilliard.runtimeconfig.json
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\bin\Debug\netcoreapp2.0\07AndreyAndBilliard.runtimeconfig.dev.json
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\bin\Debug\netcoreapp2.0\07AndreyAndBilliard.dll
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\bin\Debug\netcoreapp2.0\07AndreyAndBilliard.pdb
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\obj\Debug\netcoreapp2.0\07AndreyAndBilliard.csprojAssemblyReference.cache
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\obj\Debug\netcoreapp2.0\07AndreyAndBilliard.csproj.CoreCompileInputs.cache
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\obj\Debug\netcoreapp2.0\07AndreyAndBilliard.AssemblyInfoInputs.cache
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\obj\Debug\netcoreapp2.0\07AndreyAndBilliard.AssemblyInfo.cs
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\obj\Debug\netcoreapp2.0\07AndreyAndBilliard.dll
+C:\Users\Name\source\repos\08ObjectsAndClassesExercises\07AndreyAndBilliard\obj\Debug\netcoreapp2.0\07AndreyAndBilliard.pdb
