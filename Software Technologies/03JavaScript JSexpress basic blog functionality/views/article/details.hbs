@@ -1,0 +1,31 @@
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-12">
+            <article>
+                <header>
+                    <h2>{{title}}</h2>
+                </header>
+                <img src="{{image}}" width="640px" height="480px"/>
+                <p>
+                    {{content}}
+                </p>
+
+                <small class="author">
+                    {{this.User.fullName}}
+                </small>
+                <br>
+                {{#each article.Comments}}
+                    <span class="pull-right">{{this.User.fullName}}</span>
+                    <p>{{this.content}}</p>
+
+                {{/each}}
+
+                <footer>
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </div>
+</div>
