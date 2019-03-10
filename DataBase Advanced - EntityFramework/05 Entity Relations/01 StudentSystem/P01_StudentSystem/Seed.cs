@@ -57,7 +57,9 @@
                 new Student("Simona Simeonova", new DateTime(1990, 05, 24)),
                 new Student("Stavri Dinozavri", new DateTime(1990, 05, 25)),
                 new Student("Spiridon Kanchev", new DateTime(1991, 07, 07)),
-                new Student("Chocho Chochov", new DateTime(1991, 07, 07))
+                new Student("Chocho Chochov", new DateTime(1991, 07, 07)),
+                new Student("Simona Georgieva", new DateTime(1993, 07, 07))
+               
             };
 
             foreach (var student in students)
