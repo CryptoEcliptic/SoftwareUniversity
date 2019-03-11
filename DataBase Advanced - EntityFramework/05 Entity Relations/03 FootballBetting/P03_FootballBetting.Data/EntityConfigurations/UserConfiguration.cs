@@ -31,9 +31,6 @@ namespace P03_FootballBetting.Data.EntityConfigurations
                .HasMaxLength(100)
                .IsRequired();
 
-            builder.Property(x => x.Balance)
-              .IsRequired();
-
             builder.HasMany(x => x.Bets)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId);
