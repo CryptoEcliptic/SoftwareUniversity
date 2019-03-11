@@ -28,9 +28,6 @@ namespace P03_FootballBetting.Data.EntityConfigurations
                  .HasMaxLength(3)
                  .HasDefaultValueSql("CHAR(3)");
 
-            builder.Property(x => x.Budget)
-                .IsRequired();
-
             builder.HasOne(x => x.Town)
                 .WithMany(x => x.Teams)
                 .HasForeignKey(x => x.TownId);
