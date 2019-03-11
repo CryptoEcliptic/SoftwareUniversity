@@ -17,16 +17,7 @@
             builder.Property(x => x.Description)
                 .IsRequired(false)
                 .IsUnicode();
-
-            builder.Property(x => x.StartDate)
-                .IsRequired();
-
-            builder.Property(x => x.EndDate)
-                .IsRequired();
-
-            builder.Property(x => x.Price)
-                .IsRequired();
-
+                
             builder.HasMany(x => x.Resources)
                 .WithOne(x => x.Course)
                 .HasForeignKey(x => x.CourseId);
