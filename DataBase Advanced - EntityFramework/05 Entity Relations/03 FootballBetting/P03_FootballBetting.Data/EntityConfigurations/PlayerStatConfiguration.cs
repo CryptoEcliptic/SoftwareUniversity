@@ -12,16 +12,7 @@ namespace P03_FootballBetting.Data.EntityConfigurations
         public void Configure(EntityTypeBuilder<PlayerStatistic> builder)
         {
             builder.HasKey(x => new { x.PlayerId, x.GameId });
-
-            builder.Property(x => x.ScoredGoals)
-                .IsRequired();
-
-            builder.Property(x => x.Assists)
-                .IsRequired();
-
-            builder.Property(x => x.MinutesPlayed)
-                .IsRequired();
-
+            
             builder.HasOne(ps => ps.Player)
                 .WithMany(p => p.PlayerStatistics)
                 .HasForeignKey(ps => ps.PlayerId)
