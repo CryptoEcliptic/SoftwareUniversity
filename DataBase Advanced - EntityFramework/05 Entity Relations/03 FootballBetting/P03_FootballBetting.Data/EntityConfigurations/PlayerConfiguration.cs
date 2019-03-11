@@ -18,12 +18,6 @@ namespace P03_FootballBetting.Data.EntityConfigurations
                 .IsUnicode()
                 .HasMaxLength(100);
 
-            builder.Property(x => x.SquadNumber)
-                .IsRequired();
-
-            builder.Property(x => x.IsInjured)
-                 .IsRequired();
-
             builder.HasOne(x => x.Position)
                 .WithMany(x => x.Players)
                 .HasForeignKey(x => x.PositionId)
