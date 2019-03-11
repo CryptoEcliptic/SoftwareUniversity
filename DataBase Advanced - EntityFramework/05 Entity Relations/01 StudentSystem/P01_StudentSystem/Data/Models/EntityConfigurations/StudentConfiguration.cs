@@ -17,12 +17,8 @@
             builder.Property(x => x.PhoneNumber)
                 .HasMaxLength(10)
                 .IsFixedLength()
-                .IsUnicode(false)
-                .IsRequired(false);
-
-            builder.Property(x => x.RegisteredOn)
-                .IsRequired();
-
+                .IsUnicode(false);
+                
             builder.Property(x => x.Birthday)
                 .IsRequired(false);
 
