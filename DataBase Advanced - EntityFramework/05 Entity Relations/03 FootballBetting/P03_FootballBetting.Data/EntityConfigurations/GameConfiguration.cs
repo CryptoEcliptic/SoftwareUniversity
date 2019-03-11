@@ -13,24 +13,6 @@ namespace P03_FootballBetting.Data.EntityConfigurations
         {
             builder.HasKey(x => x.GameId);
 
-            builder.Property(x => x.HomeTeamGoals)
-                .IsRequired();
-
-            builder.Property(x => x.AwayTeamGoals)
-                .IsRequired();
-
-            builder.Property(x => x.DateTime)
-                .IsRequired();
-
-            builder.Property(x => x.HomeTeamBetRate)
-                .IsRequired();
-
-            builder.Property(x => x.AwayTeamBetRate)
-                .IsRequired();
-
-            builder.Property(x => x.DrawBetRate)
-                .IsRequired();
-
             builder.Property(x => x.Result)
                 .IsRequired();
 
