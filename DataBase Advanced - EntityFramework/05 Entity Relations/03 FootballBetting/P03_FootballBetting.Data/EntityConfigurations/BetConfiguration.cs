@@ -13,13 +13,7 @@ namespace P03_FootballBetting.Data.EntityConfigurations
         {
             builder.HasKey(x => x.BetId);
 
-            builder.Property(x => x.Amount)
-                .IsRequired();
-
             builder.Property(x => x.Prediction)
-                .IsRequired();
-
-            builder.Property(x => x.DateTime)
                 .IsRequired();
 
             builder.HasOne(x => x.User)
