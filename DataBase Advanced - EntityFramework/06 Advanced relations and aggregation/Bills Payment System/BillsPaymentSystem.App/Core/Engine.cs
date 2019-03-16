@@ -36,6 +36,10 @@
                     {
                         Console.WriteLine(ane.Message);
                     }
+                    catch (ArgumentException ae)
+                    {
+                        Console.WriteLine(ae.Message);
+                    }
                    
                 }
             }

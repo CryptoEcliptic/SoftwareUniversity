@@ -1,5 +1,6 @@
 ﻿namespace BillsPaymentSystem.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     public class BankAccount
@@ -30,5 +31,30 @@
         public string SWIFT { get; set; }
 
         public PaymentMethod PaymentMethod { get; set; }
+
+        public void Withdraw(decimal amount)
+        {
+
+            if (amount <= 0)
+            {
+                throw new ArgumentException(null, "Invalid withdraw amount!");
+            }
+
+            if (this.Balance - amount < 0)
+            {
+                throw new ArgumentException(null, "Insufficient funds!");
+            }
+
+            this.Balance -= amount;
+        }
+
+        public void Deposit(decimal amount)
+        {
+            if (amount <= 0)
+            {
+                throw new ArgumentException(null, "Invalid deposit amount!");
+            }
+            this.Balance += amount;
+        }
     }
 }

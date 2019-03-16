@@ -33,5 +33,29 @@
         public DateTime ExpirationDate { get; set; }
 
         public PaymentMethod PaymentMethod { get; set; }
+
+        public void Withdraw(decimal amount)
+        {
+            if (amount <= 0)
+            {
+                throw new ArgumentException(null, "Invalid withdraw amount!");
+            }
+
+            if (this.MoneyOwed - amount < 0)
+            {
+                throw new ArgumentException(null, "Insufficient funds!");
+            }
+
+            this.MoneyOwed -= amount;
+        }
+
+        public void Deposit(decimal amount)
+        {
+            if (amount <= 0)
+            {
+                throw new ArgumentException(null, "Invalid deposit amount!");
+            }
+            this.MoneyOwed += amount;
+        }
     }
 }

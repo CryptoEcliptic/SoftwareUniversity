@@ -2,8 +2,6 @@
 {
     using BillsPaymentSystem.App.Core;
     using BillsPaymentSystem.App.Core.Contracts;
-    using BillsPaymentSystem.Data;
-    using System;
 
     public class StartUp
     {
