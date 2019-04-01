@@ -29,7 +29,7 @@
             {
                 //string inputXml = File.ReadAllText(CategoryProductPath);
 
-                string result = GetCategoriesByProductsCount(context);
+                string result = GetUsersWithProducts(context);
 
                 System.Console.WriteLine(result);
             }
@@ -146,7 +146,7 @@
 
             var namespaces = new XmlSerializerNamespaces
             (
-                new[] { new XmlQualifiedName("","") }
+                new[] { new XmlQualifiedName("", "") }
             );
 
             StringBuilder result = new StringBuilder();
@@ -165,10 +165,10 @@
                 {
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    Products = u.ProductsSold.Select(x => new ProductDto
+                    Products = u.ProductsSold.Select(z => new SoldProductDtoUser
                     {
-                        Name = x.Name,
-                        Price = x.Price
+                        Name = z.Name,
+                        Price = z.Price
                     })
                     .ToArray()
                 })
@@ -181,7 +181,7 @@
 
             var namespaces = new XmlSerializerNamespaces
             (
-                new[] { new XmlQualifiedName("","") }
+                new[] { new XmlQualifiedName("", "") }
             );
 
             StringBuilder result = new StringBuilder();
@@ -189,8 +189,6 @@
             serializer.Serialize(new StringWriter(result), soldProducts, namespaces);
 
             return result.ToString().TrimEnd();
-
-
         }
 
         public static string GetCategoriesByProductsCount(ProductShopContext context)
@@ -211,14 +209,61 @@
 
             var namespaces = new XmlSerializerNamespaces
             (
-                new[] { new XmlQualifiedName("","") }
+                new[] { new XmlQualifiedName("", "") }
             );
 
             StringBuilder result = new StringBuilder();
 
             serializer.Serialize(new StringWriter(result), categories, namespaces);
 
-            return result.ToString().TrimEnd();  
+            return result.ToString().TrimEnd();
+
+        }
+
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+            var users = context
+                .Users
+                .Where(x => x.ProductsSold.Any())
+                .OrderByDescending(x => x.ProductsSold.Count)
+                .Select(x => new UserNamesAndAgeDto
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Age = x.Age,
+                    SoldProductDto = new SoldProductDto
+                    {
+                        Count = x.ProductsSold.Count,
+                        ProductDtos = x.ProductsSold.Select(p => new ProductDto()
+                        {
+                            Name = p.Name,
+                            Price = p.Price
+                        })
+                        .OrderByDescending(p => p.Price)
+                        .ToArray()
+                    }
+                })
+                .Take(10)
+                .ToArray();
+
+            var customExport = new ExportCustomUserProductDto
+            {
+                Count = context.Users.Count(x => x.ProductsSold.Any()),
+                ExportUserAndProductDto = users
+            };
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ExportCustomUserProductDto), new XmlRootAttribute("Users"));
+
+            var sb = new StringBuilder();
+
+            var namespaces = new XmlSerializerNamespaces(new[]
+            {
+                new XmlQualifiedName("", ""),
+            });
+
+            xmlSerializer.Serialize(new StringWriter(sb), customExport, namespaces);
+
+            return sb.ToString().TrimEnd();
         }
     }
 }
