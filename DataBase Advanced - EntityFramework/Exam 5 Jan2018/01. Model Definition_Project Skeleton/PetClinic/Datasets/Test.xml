@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Procedures>
+  <Procedure>
+    <Vet>Michael Jordan</Vet>
+    <Animal>etyhGgH678</Animal>
+    <AnimalAids>
+      <AnimalAid>
+        <Name>Fecal Test</Name>
+      </AnimalAid>
+      <AnimalAid>
+        <Name>Internal Deworming</Name>
+      </AnimalAid>
+    </AnimalAids>
+    <DateTime>12-05-1995</DateTime>
+  </Procedure>
+  <Procedure>
+    <Vet>Michael Jordan</Vet>
+    <Animal>etyhGgH678</Animal>
+    <AnimalAids>
+      <AnimalAid>
+        <Name>Fecal Test</Name>
+      </AnimalAid>
+      <AnimalAid>
+        <Name>Internal Deworming</Name>
+      </AnimalAid>
+      <AnimalAid>
+        <Name>Fecal Test</Name>
+      </AnimalAid>
+    </AnimalAids>
+    <DateTime>12-05-1995</DateTime>
+  </Procedure>
+</Procedures>
