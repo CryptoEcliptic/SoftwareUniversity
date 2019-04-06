@@ -80,7 +80,6 @@
                     currentGame.GameTags.Add(new GameTag { Tag = t });
                 }
 
-
                 gamesList.Add(currentGame);
                 sb.AppendLine($"Added {currentGame.Name} ({currentGame.Genre.Name}) with {currentGame.GameTags.Count} tags");
             }
@@ -155,11 +154,11 @@
             StringBuilder sb = new StringBuilder();
             foreach (var purchase in deserializedPurchasess)
             {
-                bool isValidGame = context.Games.Any(x => x.Name == purchase.Title);
+                var game = context.Games.FirstOrDefault(x => x.Name == purchase.Title);
                 bool isValidType = Enum.IsDefined(typeof(PurchaseType), purchase.Type);
-                bool isValidCard = context.Cards.Any(x => x.Number == purchase.Card);
+                var card = context.Cards.FirstOrDefault(x => x.Number == purchase.Card);
 
-                if (!IsValid(purchase) || !isValidGame || !isValidType || !isValidCard)
+                if (!IsValid(purchase) || game == null || !isValidType || card == null)
                 {
                     sb.AppendLine("Invalid Data");
                     continue;
@@ -167,11 +166,11 @@
 
                 var currentPurchase = new Purchase
                 {
-                    Game = context.Games.FirstOrDefault(x => x.Name == purchase.Title),
+                    Game = game,
                     ProductKey = purchase.ProductKey,
                     Date = DateTime.ParseExact(purchase.Date, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
                     Type = (PurchaseType)Enum.Parse(typeof(PurchaseType), purchase.Type),
-                    Card = context.Cards.FirstOrDefault(x => x.Number == purchase.Card)
+                    Card = card
                 };
                 purchases.Add(currentPurchase);
 

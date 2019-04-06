@@ -1,15 +1,14 @@
 ﻿namespace VaporStore.DataProcessor
 {
+    using Data;
+    using Newtonsoft.Json;
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using Data;
-    using Newtonsoft.Json;
     using VaporStore.Data.Models.Enums;
     using VaporStore.DataProcessor.DTOs.ExportDtos;
 
@@ -24,15 +23,15 @@
                     Id = x.Id,
                     Genre = x.Name,
                     Games = x.Games
-                    .Where(y => y.Purchases.Any())
-                    .Select(y => new
-                    {
-                        Id = y.Id,
-                        Title = y.Name,
-                        Developer = y.Developer.Name,
-                        Tags = (string.Join(", ", y.GameTags.Select(z => z.Tag.Name))),
-                        Players = y.Purchases.Count()
-                    })
+                        .Where(y => y.Purchases.Any())
+                        .Select(y => new
+                        {
+                            Id = y.Id,
+                            Title = y.Name,
+                            Developer = y.Developer.Name,
+                            Tags = (string.Join(", ", y.GameTags.Select(z => z.Tag.Name))),
+                            Players = y.Purchases.Count()
+                        })
                     .OrderByDescending(y => y.Players)
                     .ThenBy(y => y.Id)
                     .ToList(),
@@ -55,20 +54,20 @@
                 {
                     UserName = x.Username,
                     PurchaseExportDto = x.Cards
-                    .SelectMany(y => y.Purchases)
-                    .Where(t => t.Type == type)
-                    .Select(y => new PurchaseExportDto
-                    {
-                        Card = y.Card.Number,
-                        Cvc = y.Card.Cvc,
-                        Date = y.Date.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
-                        Game = new ExportGameDto
+                        .SelectMany(y => y.Purchases)
+                        .Where(t => t.Type == type)
+                        .Select(y => new PurchaseExportDto
                         {
-                            Title = y.Game.Name,
-                            Genre = y.Game.Genre.Name,
-                            Price = y.Game.Price
-                        }
-                    })
+                            Card = y.Card.Number,
+                            Cvc = y.Card.Cvc,
+                            Date = y.Date.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
+                            Game = new ExportGameDto
+                            {
+                                Title = y.Game.Name,
+                                Genre = y.Game.Genre.Name,
+                                Price = y.Game.Price
+                            }
+                        })
                     .OrderBy(y => y.Date)
                     .ToArray(),
                      TotalSpent = x.Cards.SelectMany(z => z.Purchases)
