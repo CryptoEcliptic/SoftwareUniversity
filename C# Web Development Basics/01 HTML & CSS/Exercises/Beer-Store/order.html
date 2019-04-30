@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/form.css">
+    <title>SoftUni Beers</title>
+</head>
+<body>
+    <nav>
+        <div class="topnav">
+            <a class="logo" href="index.html"><img src="images/logo.png"/></a>
+            <a href="index.html">Home</a>
+            <a href="all-beers.html">See All Beers</a>
+            <a class="active" href="order.html">Order a Beer</a>
+            <a class="right" href="register.html">Register</a>
+            <a class="right" href="login.html">Log in</a>
+        </div>
+    </nav>
+    <main>
+        <center>
+            <h1>Order a Beer</h1>
+            <form>
+                <label>Brand</label>
+                <select>
+                    <option selected disabled>Select a brand</option>
+                    <option>Corona Extra 330 ml</option>
+                    <option>Stella Artois 500 ml</option>
+                    <option>Carlsberg 330 ml</option>
+                    <option>Heineken 500 ml</option>
+                </select>
+
+                <label>Quantity</label>
+                <input type="number" min="1" max="15" placeholder="Enter amount of beers (1-15)">
+
+                <label>Destination</label>
+                <select>
+                    <option selected disabled>Select a destination</option>
+                    <option>Home</option>
+                    <option>Office</option>
+                    <option>School</option>
+                    <option>Kindergarten</option>
+                </select>
+
+                <label>Enter your Birth date</label>
+                <input placeholder="mm/dd/yyyy" type="date">
+
+                <label>Got an opinion, comment, recommendation? Share it with us!</label>
+                <textarea placeholder="Share your opinion with us!" rows="4" cols="50"></textarea>
+
+                <input style="width: 40%" type="submit" value="Order">
+            </form>
+        </center>
+    </main>
+<footer>
+    <hr/>
+    <p><em>&copy; 2019 &ndash; SoftUni Beers</em></p>
+</footer>
+</body>
+</html>
