@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+</head>
+<body>
+    <form method="post" action="/login">
+        <div class="container">
+            <h1>Login</h1>
+            <hr>
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+
+            <input type="submit" value="Login">         
+        </div>
+    </form>
+    <br/>
+    Don't have an account?
+    <form method="get" action="/register">
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>

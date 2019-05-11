@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Add Cake</title>
+</head>
+<body>
+    <form method="post" action="/register">
+        <div class="container">
+            <h1>Add Cake</h1>
+            <hr>
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Cake name" name="name" required>
+            <br />
+            <label for="price"><b>Price</b></label>
+            <input type="number" placeholder="Add price" name="price" required min="0.01" step="0.01">
+            <br />
+            <label for="url"><b>Enter Picture Url</b></label>
+            <input type="url" placeholder="Enter Url" name="url" required>
+            <hr>
+            <input type="submit" value="Add cake">
+        </div>
+    </form>
+</body>
+</html>
