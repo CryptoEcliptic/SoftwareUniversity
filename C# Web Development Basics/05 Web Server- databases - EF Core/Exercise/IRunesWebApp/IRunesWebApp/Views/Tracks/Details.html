@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Details</title>
+</head>
+<body>
+    <h1>IRunes</h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/albums/all">Albums</a></li>
+        <li><a href="/logout">LogOut</a></li>
+    </ul>
+    <hr />
+    <iframe width="960" height="720" src="{{trackLink}}"></iframe>
+    <h4 class="card-title">Name: {{trackName}}</h4>
+    <h4 class="card-title">Price: ${{trackPrice}}</h4>
+    <hr />
+    <a href="/albums/details?id={{albumId}}">Back to album</a>
+    <hr />
+
+    <footer>
+        <p><strong>CopyRight© Sanity Design Studios. All rights reserved.</strong></p>
+    </footer>
+</body>
+</html>
