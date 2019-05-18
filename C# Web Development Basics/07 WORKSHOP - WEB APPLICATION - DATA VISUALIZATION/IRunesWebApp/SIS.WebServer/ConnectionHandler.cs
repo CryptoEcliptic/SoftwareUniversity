@@ -32,7 +32,7 @@
 
         public async Task ProcessRequestAsync()
         {
-            var httpRequest = await this.ReadRequest();
+            var httpRequest = await this.ReadRequestAsync();
 
             if (httpRequest != null)
             {
@@ -41,13 +41,13 @@
                 var httpResponse = this.HandleRequest(httpRequest);
 
                 this.SetResponseSession(httpResponse, sessionId);
-                await this.PrepareResponse(httpResponse);
+                await this.PrepareResponseAsync(httpResponse);
             }
 
             this.client.Shutdown(SocketShutdown.Both);
         }
 
-        private async Task<IHttpRequest> ReadRequest()
+        private async Task<IHttpRequest> ReadRequestAsync()
         {
             var result = new StringBuilder();
             var data = new ArraySegment<byte>(new byte[1024]);
@@ -78,7 +78,7 @@
             return new HttpRequest(result.ToString());
         }
 
-        private IHttpResponse HandleRequest(IHttpRequest httpRequest)
+        private  IHttpResponse HandleRequest(IHttpRequest httpRequest)
         {
             var isResourceRequest = this.IsResourceRequest(httpRequest);
 
@@ -132,7 +132,7 @@
             return false;
         }
 
-        private async Task PrepareResponse(IHttpResponse httpResponse)
+        private async Task PrepareResponseAsync(IHttpResponse httpResponse)
         {
             byte[] byteSegments = httpResponse.GetBytes();
 

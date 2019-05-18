@@ -33,11 +33,11 @@
 
             Console.WriteLine($"Server started at http://{LocalHostIpAddress}:{this.port}");
 
-            var task = Task.Run(this.ListenLoop);
+            var task = Task.Run(this.ListenLoopAsync);
             task.Wait();
         }
 
-        public async Task ListenLoop()
+        public async Task ListenLoopAsync()
         {
             while (this.isRunning)
             {
