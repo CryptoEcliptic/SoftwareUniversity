@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Album</title>
+</head>
+<body>
+    <h1>Album</h1>
+    <img src="{{albumCover}}" />
+    <h4 class="card-title">Name: {{albumName}}</h4>
+    <h4 class="card-title">Price: ${{albumPrice}}</h4>
+    <br />
+    <h4>Tracks</h4>
+    <hr />
+        <a href="/tracks/create?albumId={{albumId}}">Create Track</a>
+    <hr />
+    <ul>
+        {{songsList}}
+    </ul>
+    <hr />
+    <a href="/albums/all">Back to all</a>
+</body>
+</html>

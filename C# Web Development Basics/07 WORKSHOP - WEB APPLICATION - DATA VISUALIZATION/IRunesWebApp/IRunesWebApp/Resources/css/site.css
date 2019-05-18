@@ -1,0 +1,67 @@
+﻿.body {
+    color: white;
+}
+
+.navbar {
+    background-color: forestgreen;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: white;
+}
+
+ .navbar-nav .nav-item .nav-link:hover {
+        color: orange;
+ }
+
+a {
+ color: orange;
+}
+
+a:hover {
+    color: orange;
+}
+
+.top-border-line {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-top: solid;
+    border-color: forestgreen
+}
+
+.jumbotron {
+    background-color: forestgreen;
+    color: white;
+}
+
+.jumbotron-line {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: solid;
+    border-color: white
+}
+
+.bottom-border-line {
+    border-top: solid;
+    border-color: forestgreen;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.jumbotron-login-register {
+    background-color: white;
+    color: forestgreen;
+    margin: 0 auto;
+    width: 80%
+}
+
+.jumbotron-line-login-register {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-top: solid;
+    border-color: forestgreen;
+}
+
+.register-login-form{
+    color:black; 
+}
