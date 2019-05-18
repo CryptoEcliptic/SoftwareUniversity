@@ -16,8 +16,7 @@
    
         public UsersController()
         {
-            this.passwordHasher = new PasswordHasher();
-          
+            this.passwordHasher = new PasswordHasher(); 
         }
 
         public IHttpResponse Login(IHttpRequest request)
@@ -55,7 +54,7 @@
             var confirmPassword = request.FormData["confirmPassword"].ToString();
             var email = request.FormData["email"].ToString();
             string decodedEmail = HttpUtility.UrlDecode(email);
-
+            
             if (string.IsNullOrWhiteSpace(userName) || userName.Length < 3)
             {
                 return this.BadRequestError("Username should be more than 2 characters");
@@ -75,6 +74,7 @@
             {
                 return this.BadRequestError("Password and Confirm password fields do not match!");
             }
+
             //Hashing password
             string hashedPassword = this.passwordHasher.HashPassword(password);
 

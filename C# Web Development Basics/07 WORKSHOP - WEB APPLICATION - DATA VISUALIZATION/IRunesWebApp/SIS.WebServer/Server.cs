@@ -25,7 +25,7 @@
 
             this.serverRoutingTable = serverRoutingTable;
         }
-
+ 
         public void Run()
         {
             this.listener.Start();
@@ -33,8 +33,15 @@
 
             Console.WriteLine($"Server started at http://{LocalHostIpAddress}:{this.port}");
 
-            var task = Task.Run(this.ListenLoopAsync);
-            task.Wait();
+            try
+            {
+                var task = Task.Run(this.ListenLoopAsync);
+                task.Wait();
+            }
+            catch (System.AggregateException ae)
+            {
+                Console.WriteLine(ae.Message);
+            }
         }
 
         public async Task ListenLoopAsync()
