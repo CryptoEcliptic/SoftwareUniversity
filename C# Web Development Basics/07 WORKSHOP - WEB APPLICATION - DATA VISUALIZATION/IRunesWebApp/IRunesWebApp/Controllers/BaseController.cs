@@ -16,6 +16,11 @@
 
     public abstract class BaseController
     {
+        private readonly List<string> NotLoggedViews = new List<string>()
+        {
+            "Index", "Login", "Register", "ForgotPassword", "InvalidEmail"
+        };
+
         private const string RoothDirectoryBackPath = "../../../";
         private const string ViewsFolderName = "Views";
         private const string DirectorySeperator = "/";
@@ -59,7 +64,7 @@
             var viewContent = BuildViewContent(filePath);
             var viewLayout = File.ReadAllText(layoutView);
 
-            if (viewName == "Index" || viewName == "Login" || viewName == "Register")
+            if (this.NotLoggedViews.Contains(viewName))
             {
                 return new HtmlResult(viewContent, HttpResponseStatusCode.Ok);
             }

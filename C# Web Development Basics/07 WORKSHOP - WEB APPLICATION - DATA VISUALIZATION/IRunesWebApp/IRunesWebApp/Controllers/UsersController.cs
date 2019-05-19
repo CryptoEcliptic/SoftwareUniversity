@@ -8,7 +8,6 @@
     using SIS.WebServer.Results;
     using System;
     using System.Linq;
-    using System.Web;
 
     public class UsersController : BaseController
     {
@@ -52,9 +51,8 @@
             var userName = request.FormData["username"].ToString().Trim();
             var password = request.FormData["password"].ToString();
             var confirmPassword = request.FormData["confirmPassword"].ToString();
-            var email = request.FormData["email"].ToString();
-            string decodedEmail = HttpUtility.UrlDecode(email);
-            
+            var email = HtmlDecoder.Decode(request.FormData["email"].ToString());
+
             if (string.IsNullOrWhiteSpace(userName) || userName.Length < 3)
             {
                 return this.BadRequestError("Username should be more than 2 characters");
@@ -82,7 +80,7 @@
             {
                 Username = userName,
                 Password = hashedPassword,
-                Email = decodedEmail
+                Email = email
             };
 
             //Save data in the DB
@@ -115,6 +113,25 @@
             response.Cookies.Add(cookie);
 
             return response;
+        }
+
+        public IHttpResponse SetNewPasswordGet(IHttpRequest request)
+        {
+            return this.View("ForgotPassword");
+        }
+
+        public IHttpResponse SetNewPasswordPost(IHttpRequest request)
+        {
+            var email = HtmlDecoder.Decode(request.FormData["email"].ToString());
+
+            if (!this.DbContext.Users.Any(x => x.Email == email))
+            {
+                return this.View("InvalidEmail");
+            }
+
+            return new RedirectResult("/");
+            //TODO rendom password generator for generating temp password
+            //TODO find a way to sent the temp password to the user email
         }
     }
 }

@@ -26,6 +26,8 @@
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/tracks/create"] = request => new TracksController().CreateGet(request);
             serverRoutingTable.Routes[HttpRequestMethod.Post]["/tracks/create"] = request => new TracksController().CreatePost(request);
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/tracks/details"] = request => new TracksController().Details(request);
+            serverRoutingTable.Routes[HttpRequestMethod.Get]["/users/forgottenPassword"] = request => new UsersController().SetNewPasswordGet(request);
+            serverRoutingTable.Routes[HttpRequestMethod.Post]["/users/forgottenPassword"] = request => new UsersController().SetNewPasswordPost(request);
 
             Server server = new Server(80, serverRoutingTable);
 

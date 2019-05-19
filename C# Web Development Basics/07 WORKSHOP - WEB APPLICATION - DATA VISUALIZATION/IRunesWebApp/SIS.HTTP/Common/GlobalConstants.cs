@@ -7,6 +7,6 @@
         public const string SplitHeader = ": ";
         public const string KeyValuePairDelimiter = "=";
         public const string CookieRequestHeaderName = "Cookie";
-        public static string[] ResourceExtensions = new string[] { ".js", ".css" };
+        public static string[] ResourceExtensions = new string[] { ".js", ".css", ".gif" };
     }
 }
