@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ActionResults\" />
     <Folder Include="Views\" />
     <Folder Include="Utilities\" />
     <Folder Include="Routers\" />
