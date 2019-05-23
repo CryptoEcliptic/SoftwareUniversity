@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Album</title>
+</head>
+<body>
+    <div class="row">
+        <div class="card col-md-4" style="width: 18rem; border:none">
+            <img class="img-thumbnail" height: auto src="{{albumCover}}" alt="{{albumName}}"/>
+            <div class="card-body" style="border:none">
+                <h4 class="card-title" style="text-align:center">Album Name: {{albumName}}</h4>
+                <h4 class="card-title" style="text-align:center">Album Price: ${{albumPrice}}</h4>
+                <div class="col">
+                    <a class="btn btn-success float-left col-md-4" href="/tracks/create?albumId={{albumId}}">Create Track</a>
+                </div>
+                <div class="col">
+                    <a class="btn btn-success float-right col-md-4" href="/albums/all">Back To All</a>
+                </div>
+            </div>   
+        </div>
+        <div class="col-sm-7">
+            <div class="card" style="border-width: 0">
+                <div class="card-body" style="border-width: 0">
+                    <h4>Tracks</h4>
+                    <ul>
+                        {{songsList}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

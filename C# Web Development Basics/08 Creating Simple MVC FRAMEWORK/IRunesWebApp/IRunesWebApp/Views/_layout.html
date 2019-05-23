@@ -2,8 +2,8 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-16" />
-    <title>Email Not Found</title>
+    <meta charset="utf-8" />
+    <title>IRunes - best site for music</title>
     <link rel="stylesheet" href="bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="site.css" type="text/css" />
     <link rel="shortcut icon" href="https://img.icons8.com/color/96/000000/musical.png" type="image/x-icon">
@@ -21,26 +21,21 @@
                     <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/login">Login<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/albums/all">Albums<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/register">Register<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
     </nav>
-
     <div class="top-border-line"></div>
-    <h1 style="text-align:center">There is no user registered with that email!</h1>
-    <div class="col offset-md-5">
-        <img src="http://bestanimations.com/Animals/Reptiles/turtles/funny-turtle-animated-gif-6.gif" alt="image" />
-    </div>
 
+    @RenderBody()
     <div class="bottom-border-line"></div>
     <footer style="text-align:center">
         <p><strong>CopyRight© Sanity Design Studios. All rights reserved.</strong></p>
     </footer>
-
     <script src="jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="popper.min.js" type="text/javascript"></script>
     <script src="bootstrap.min.js" type="text/javascript"></script>
