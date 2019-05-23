@@ -1,33 +1,26 @@
 ﻿namespace SIS.WebServer
 {
-    using SIS.HTTP.Common;
     using SIS.HTTP.Cookies;
-    using SIS.HTTP.Enums;
     using SIS.HTTP.Requests;
     using SIS.HTTP.Requests.Contracts;
-    using SIS.HTTP.Responses;
     using SIS.HTTP.Responses.Contracts;
     using SIS.HTTP.Sessions;
-    using SIS.WebServer.Results;
-    using SIS.WebServer.Routing;
+    using SIS.WebServer.Api;
     using System;
-    using System.IO;
-    using System.Linq;
     using System.Net.Sockets;
-    using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
 
     public class ConnectionHandler
     {
         private readonly Socket client;
-        private readonly ServerRoutingTable serverRoutingTable;
+        private readonly IHttpHandler handler;
         private const string RootDirectoryRelativePath = "../../..";
 
-        public ConnectionHandler(Socket socket, ServerRoutingTable serverRoutingTable)
+        public ConnectionHandler(Socket socket, IHttpHandler handler)
         {
             this.client = socket;
-            this.serverRoutingTable = serverRoutingTable;
+            this.handler = handler;
         }
 
         public async Task ProcessRequestAsync()
@@ -38,7 +31,7 @@
             {
                 string sessionId = this.SetRequestSession(httpRequest);
 
-                var httpResponse = this.HandleRequest(httpRequest);
+                var httpResponse = this.handler.Handle(httpRequest);
 
                 this.SetResponseSession(httpResponse, sessionId);
                 await this.PrepareResponseAsync(httpResponse);
@@ -76,60 +69,6 @@
             }
 
             return new HttpRequest(result.ToString());
-        }
-
-        private  IHttpResponse HandleRequest(IHttpRequest httpRequest)
-        {
-            var isResourceRequest = this.IsResourceRequest(httpRequest);
-
-            if (isResourceRequest)
-            {
-                return this.HandleRequestResponse(httpRequest.Path);
-            }
-
-            if (!this.serverRoutingTable.Routes.ContainsKey(httpRequest.RequestMethod)
-           || !this.serverRoutingTable.Routes[httpRequest.RequestMethod].ContainsKey(httpRequest.Path))
-            {
-                return new HttpResponse(HttpResponseStatusCode.NotFound);
-            }
-
-
-            return this.serverRoutingTable.Routes[httpRequest.RequestMethod][httpRequest.Path].Invoke(httpRequest);
-        }
-
-        private IHttpResponse HandleRequestResponse(string httpRequestPath)
-        {
-            var startIndexOfExtension = httpRequestPath.LastIndexOf('.');
-            var resourceNameStartIndex = httpRequestPath.LastIndexOf('/');
-
-            var requestPathExtension = httpRequestPath.Substring(startIndexOfExtension);
-            var resourceName = httpRequestPath.Substring(resourceNameStartIndex);
-
-            var resourcePath = RootDirectoryRelativePath
-                + "/Resources"
-                + $"/{requestPathExtension.Substring(1)}"
-                + resourceName
-                ;
-
-            if (!File.Exists(resourcePath))
-            {
-                return new HttpResponse(HttpResponseStatusCode.NotFound);
-            }
-
-            var fileContent = File.ReadAllBytes(resourcePath);
-            return new InlineResourceResult(fileContent, HttpResponseStatusCode.Ok);
-
-        }
-
-        private bool IsResourceRequest(IHttpRequest httpRequest)
-        {
-            var requestPath = httpRequest.Path;
-            if (requestPath.Contains('.'))
-            {
-                var requestPathExtension = requestPath.Substring(requestPath.LastIndexOf('.'));
-                return GlobalConstants.ResourceExtensions.Contains(requestPathExtension);
-            }
-            return false;
         }
 
         private async Task PrepareResponseAsync(IHttpResponse httpResponse)

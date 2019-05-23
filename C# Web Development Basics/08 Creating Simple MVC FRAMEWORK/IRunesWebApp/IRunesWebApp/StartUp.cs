@@ -3,6 +3,7 @@
     using IRunesWebApp.Controllers;
     using SIS.HTTP.Enums;
     using SIS.WebServer;
+    using SIS.WebServer.Api;
     using SIS.WebServer.Results;
     using SIS.WebServer.Routing;
 
@@ -12,6 +13,16 @@
         {
             ServerRoutingTable serverRoutingTable = new ServerRoutingTable();
 
+            var handler = new HttpHandler(serverRoutingTable);
+            ConfigureRouting(serverRoutingTable);
+           
+
+            Server server = new Server(80, handler);
+            server.Run();
+
+        }
+        private static void ConfigureRouting(ServerRoutingTable serverRoutingTable)
+        { 
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/home/index"] = request => new RedirectResult("/");
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/"] = request => new HomeController().Index(request);
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/users/login"] = request => new UsersController().Login(request);
@@ -28,11 +39,6 @@
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/tracks/details"] = request => new TracksController().Details(request);
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/users/forgottenPassword"] = request => new UsersController().SetNewPasswordGet(request);
             serverRoutingTable.Routes[HttpRequestMethod.Post]["/users/forgottenPassword"] = request => new UsersController().SetNewPasswordPost(request);
-
-            Server server = new Server(80, serverRoutingTable);
-
-            server.Run();
-
         }
     }
 }
