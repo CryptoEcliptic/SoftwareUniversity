@@ -14,7 +14,7 @@
 
         public string ControllersSufix = "Controller";
 
-        public string ViewsFolder { get; set; }
+        public string ViewsFolder { get; set; } = "Views";
 
         public string ModelsFolder { get; set; }
     }

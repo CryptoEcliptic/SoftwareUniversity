@@ -7,6 +7,7 @@
     using SIS.HTTP.Enums;
     using SIS.HTTP.Requests.Contracts;
     using SIS.HTTP.Responses.Contracts;
+    using SIS.MvcFramework.Controllers;
     using SIS.WebServer.Results;
     using System;
     using System.Collections.Generic;
@@ -14,7 +15,7 @@
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    public abstract class BaseController
+    public abstract class BaseController : Controller
     {
         private readonly List<string> NotLoggedViews = new List<string>()
         {

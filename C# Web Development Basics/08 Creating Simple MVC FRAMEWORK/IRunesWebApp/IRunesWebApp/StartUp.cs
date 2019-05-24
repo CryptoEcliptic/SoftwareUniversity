@@ -2,10 +2,12 @@
 {
     using IRunesWebApp.Controllers;
     using SIS.HTTP.Enums;
+    using SIS.MvcFramework;
     using SIS.WebServer;
     using SIS.WebServer.Api;
     using SIS.WebServer.Results;
     using SIS.WebServer.Routing;
+    using System.Reflection;
 
     public class StartUp
     {
@@ -14,6 +16,7 @@
             ServerRoutingTable serverRoutingTable = new ServerRoutingTable();
 
             var handler = new HttpHandler(serverRoutingTable);
+            MvcContext.Get.AssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
             ConfigureRouting(serverRoutingTable);
            
 
