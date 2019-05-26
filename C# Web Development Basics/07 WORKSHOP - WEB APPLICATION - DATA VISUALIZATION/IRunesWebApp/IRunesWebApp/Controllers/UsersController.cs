@@ -7,6 +7,7 @@
     using SIS.HTTP.Responses.Contracts;
     using SIS.WebServer.Results;
     using System;
+    using System.Globalization;
     using System.Linq;
 
     public class UsersController : BaseController
@@ -53,6 +54,7 @@
             var confirmPassword = request.FormData["confirmPassword"].ToString();
             var email = HtmlDecoder.Decode(request.FormData["email"].ToString());
 
+
             if (string.IsNullOrWhiteSpace(userName) || userName.Length < 3)
             {
                 return this.BadRequestError("Username should be more than 2 characters");
@@ -80,7 +82,8 @@
             {
                 Username = userName,
                 Password = hashedPassword,
-                Email = email
+                Email = email,
+                RegistrationDate = DateTime.UtcNow,
             };
 
             //Save data in the DB
@@ -146,6 +149,7 @@
 
             this.ViewBag["username"] = user.Username;
             this.ViewBag["email"] = user.Email;
+            this.ViewBag["registrationDate"] = user.RegistrationDate.ToString("dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
 
             return this.View("ProfileInfo");
         }
