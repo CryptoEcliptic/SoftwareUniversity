@@ -38,6 +38,7 @@
             }
             var response = new RedirectResult("/");
             this.SignInUser(username, request, response);
+            
 
             return response;
         }
@@ -108,7 +109,23 @@
                 return new RedirectResult("/");
             }
 
+            var username = request.Session.GetParameter("username").ToString();
+            var user = this.DbContext.Users.FirstOrDefault(x => x.Username == username);
+            user.LastLogin = DateTime.UtcNow;
+
+            try
+            {
+                this.DbContext.Users.Update(user);
+                this.DbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return this.ServerError(e.Message);
+            }
+
             var cookie = request.Cookies.GetCookie(".auth-IRunes");
+            
+
             cookie.Delete();
             request.Session.ClearParameters();
 
@@ -150,7 +167,7 @@
             this.ViewBag["username"] = user.Username;
             this.ViewBag["email"] = user.Email;
             this.ViewBag["registrationDate"] = user.RegistrationDate.ToString("dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
-
+            this.ViewBag["lastLogin"] = user.LastLogin?.ToString("dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
             return this.View("ProfileInfo");
         }
     }
