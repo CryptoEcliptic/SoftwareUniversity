@@ -34,6 +34,7 @@
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/users/forgottenPassword"] = request => new UsersController().SetNewPasswordGet(request);
             serverRoutingTable.Routes[HttpRequestMethod.Post]["/users/forgottenPassword"] = request => new UsersController().SetNewPasswordPost(request);
             serverRoutingTable.Routes[HttpRequestMethod.Get]["/logout"] = request => new UsersController().Logout(request);
+            serverRoutingTable.Routes[HttpRequestMethod.Get]["/users/details"] = request => new UsersController().GetUsersDetails(request);
             #endregion
 
             #region Albums routs

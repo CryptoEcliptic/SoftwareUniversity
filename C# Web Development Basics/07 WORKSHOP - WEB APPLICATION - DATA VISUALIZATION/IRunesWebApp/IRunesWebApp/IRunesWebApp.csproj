@@ -26,7 +26,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\pics\funny-turtle-animated.gif">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Views\Albums\Details.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

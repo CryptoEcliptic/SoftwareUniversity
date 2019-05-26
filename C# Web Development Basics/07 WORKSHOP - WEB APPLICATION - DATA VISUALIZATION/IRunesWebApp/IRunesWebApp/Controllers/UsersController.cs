@@ -12,10 +12,10 @@
     public class UsersController : BaseController
     {
         private IPasswordHasher passwordHasher;
-   
+
         public UsersController()
         {
-            this.passwordHasher = new PasswordHasher(); 
+            this.passwordHasher = new PasswordHasher();
         }
 
         public IHttpResponse Login(IHttpRequest request)
@@ -37,7 +37,7 @@
             }
             var response = new RedirectResult("/");
             this.SignInUser(username, request, response);
-           
+
             return response;
         }
 
@@ -132,6 +132,22 @@
             return new RedirectResult("/");
             //TODO rendom password generator for generating temp password
             //TODO find a way to sent the temp password to the user email
+        }
+
+        public IHttpResponse GetUsersDetails(IHttpRequest request)
+        {
+            if (!this.IsAuthenticated(request))
+            {
+                return new RedirectResult("/users/login");
+            }
+
+            var username = request.Session.GetParameter("username").ToString();
+            var user = this.DbContext.Users.FirstOrDefault(x => x.Username == username);
+
+            this.ViewBag["username"] = user.Username;
+            this.ViewBag["email"] = user.Email;
+
+            return this.View("ProfileInfo");
         }
     }
 }
