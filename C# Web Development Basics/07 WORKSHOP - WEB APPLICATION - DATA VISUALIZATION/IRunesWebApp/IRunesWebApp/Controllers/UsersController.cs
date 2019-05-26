@@ -13,6 +13,7 @@
     public class UsersController : BaseController
     {
         private IPasswordHasher passwordHasher;
+        private const string WarningMessageallert = "<div class=\"alert alert-danger alert-dismissable\"><a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">x</a><strong>Error! </strong>Incorrect username or password!</div>";
 
         public UsersController()
         {
@@ -21,6 +22,7 @@
 
         public IHttpResponse Login(IHttpRequest request)
         {
+            this.ViewBag["warning"] = string.Empty;
             return this.View("Login");
         }
 
@@ -34,11 +36,12 @@
 
             if (user == null)
             {
-                return this.BadRequestError("Incorrect username or password!");
+                this.ViewBag["warning"] = WarningMessageallert;
+                return this.View("Login");
             }
+
             var response = new RedirectResult("/");
             this.SignInUser(username, request, response);
-            
 
             return response;
         }

@@ -35,7 +35,7 @@
         <div class="jumbotron-login-register col-md-6">
             <h2 style="text-align:center">Login</h2>
             <div class="jumbotron-line-login-register"></div>
-
+            {{warning}}
             <form method="post" action="/users/login" class="register-login-form">
                 <label for="username">Username / Email</label>
                 <div><input class="form-control" type="text" name="username" placeholder="Username/Email..." /></div>
@@ -51,9 +51,7 @@
                         <a class="btn btn-info offset-md-6 col-md-4" href="/users/forgottenPassword">Forgot password?</a>
                     </div>
                 </div>
-               
             </form>
-
         </div>
     </div>
     <div class="bottom-border-line"></div>

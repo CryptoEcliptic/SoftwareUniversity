@@ -8,7 +8,6 @@
     using SIS.HTTP.Headers;
     using SIS.HTTP.Headers.Contracts;
     using SIS.HTTP.Requests.Contracts;
-    using SIS.HTTP.Sessions;
     using SIS.HTTP.Sessions.Contracts;
     using System;
     using System.Collections.Generic;
