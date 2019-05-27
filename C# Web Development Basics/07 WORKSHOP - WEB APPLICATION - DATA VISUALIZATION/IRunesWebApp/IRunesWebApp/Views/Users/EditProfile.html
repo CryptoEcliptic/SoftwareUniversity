@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>My Profile</title>
+</head>
+<body>
+    <div class="card col-lg-6 offset-3">
+        {{allert}}
+        <div class="card-body active">
+            <h4>Edit my profile</h4>
+            <h5 class="card-text">Username: {{username}}</h5>
+            <form method="post" action="/users/details/edit" class="edit-form">
+                <label for="email">Edit your email</label>
+                <div><input class="form-control" type="email" name="email" placeholder={{email}} /></div>
+                <br />
+                <div class="d-flex justify-content-around">
+                    <a href="/users/details" class="btn btn-success">Back to profile</a>
+                    <button type="submit" class="btn btn-info">Edit profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

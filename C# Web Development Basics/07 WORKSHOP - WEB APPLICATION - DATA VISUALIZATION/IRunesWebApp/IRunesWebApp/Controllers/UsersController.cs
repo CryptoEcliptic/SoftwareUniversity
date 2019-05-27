@@ -13,7 +13,10 @@
     public class UsersController : BaseController
     {
         private IPasswordHasher passwordHasher;
-        private const string WarningMessageallert = "<div class=\"alert alert-danger alert-dismissable\"><a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">x</a><strong>Error! </strong>Incorrect username or password!</div>";
+        private const string IncorrectLoginDataAllert = "<div class=\"alert alert-danger alert-dismissable\"><a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">x</a><strong>Error! </strong>Incorrect username or password!</div>";
+        private const string SuccessfullyUpdatedEmailAllert = "<div class=\"alert alert-success alert-dismissable\"><a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">x</a><strong>Success! </strong>Successfully updated your email!</div>";
+        private const string ExistingEmailAllert = "<div class=\"alert alert-danger alert-dismissable\"><a class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">x</a><strong>Error! </strong>There is a user already registered with that email!</div>";
+
 
         public UsersController()
         {
@@ -36,7 +39,7 @@
 
             if (user == null)
             {
-                this.ViewBag["warning"] = WarningMessageallert;
+                this.ViewBag["warning"] = IncorrectLoginDataAllert;
                 return this.View("Login");
             }
 
@@ -127,9 +130,8 @@
             }
 
             var cookie = request.Cookies.GetCookie(".auth-IRunes");
-            
-
             cookie.Delete();
+
             request.Session.ClearParameters();
 
             var response = new RedirectResult("/");
@@ -172,6 +174,60 @@
             this.ViewBag["registrationDate"] = user.RegistrationDate.ToString("dd/MM/yyyy hh:mm tt", CultureInfo.InvariantCulture);
             this.ViewBag["lastLogin"] = user.LastLogin?.ToString("dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
             return this.View("ProfileInfo");
+        }
+
+        public IHttpResponse EditUsersDetailsGet(IHttpRequest request)
+        {
+            if (!this.IsAuthenticated(request))
+            {
+                return new RedirectResult("/users/login");
+            }
+
+            var username = request.Session.GetParameter("username").ToString();
+            var user = this.DbContext.Users.FirstOrDefault(x => x.Username == username);
+
+            this.ViewBag["username"] = user.Username;
+            this.ViewBag["email"] = user.Email;
+            this.ViewBag["allert"] = string.Empty;
+
+            return this.View("EditProfile");
+        }
+
+        public IHttpResponse EditUsersDetailsPost(IHttpRequest request)
+        {
+            if (!this.IsAuthenticated(request))
+            {
+                return new RedirectResult("/users/login");
+            }
+
+            var username = request.Session.GetParameter("username").ToString();
+            var user = this.DbContext.Users.FirstOrDefault(x => x.Username == username);
+            this.ViewBag["username"] = user.Username;
+          
+            var updatedEmail = HtmlDecoder.Decode(request.FormData["email"].ToString());
+
+            if (this.DbContext.Users.Any(x => x.Email == updatedEmail))
+            {
+                this.ViewBag["email"] = user.Email;
+                this.ViewBag["allert"] = ExistingEmailAllert;
+                return this.View("EditProfile");
+            }
+
+            user.Email = updatedEmail;
+
+            try
+            {
+                this.DbContext.Users.Update(user);
+                this.DbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return this.ServerError(e.Message);
+            }
+
+            this.ViewBag["email"] = user.Email;
+            this.ViewBag["allert"] = SuccessfullyUpdatedEmailAllert;
+            return this.View("EditProfile");
         }
     }
 }

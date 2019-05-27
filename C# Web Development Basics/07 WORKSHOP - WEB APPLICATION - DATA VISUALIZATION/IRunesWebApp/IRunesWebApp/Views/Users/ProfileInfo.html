@@ -8,13 +8,16 @@
 </head>
 <body>
     <div class="card col-lg-6 offset-3">
-        <div class="card-body">
+        <div class="card-body active">
             <h4>My profile</h4>
             <h5 class="card-text">Username: {{username}}</h5>
             <p class="card-text">Email: {{email}}</p>
             <p class="card-text">Registration Date: {{registrationDate}} (GMT)</p>
             <p class="card-text">Last Login: {{lastLogin}} (GMT)</p>
-            <a href="/" class="btn btn-success">Back to home</a>
+            <div class="d-flex justify-content-around">
+                <a href="/" class="btn btn-success">Back to home</a>
+                <a href="/users/details/edit" class="btn btn-info">Edit Profile</a>
+            </div>
         </div>
     </div>
 </body>

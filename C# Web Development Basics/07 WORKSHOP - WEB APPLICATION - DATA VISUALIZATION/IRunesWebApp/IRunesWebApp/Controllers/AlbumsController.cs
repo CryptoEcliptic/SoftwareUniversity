@@ -36,8 +36,8 @@
                     int number = 1;
                     foreach (var album in albums)
                     {
-                        var albumHtml = $"<h3><a style=\"color: limegreen\" href=\"/albums/details?id={album.Id}\">{number++}. {album.Name}</a></h3>";
-                        albumsHtml.AppendLine(albumHtml);
+                        var albumHtml = $"<tr><th>{number++}.</th><th><a href=\"/albums/details?id={album.Id}\" style=\"color: black\">{album.Name}</a></th></tr>";
+                        albumsHtml.Append(albumHtml);
                     }
                 }
 
