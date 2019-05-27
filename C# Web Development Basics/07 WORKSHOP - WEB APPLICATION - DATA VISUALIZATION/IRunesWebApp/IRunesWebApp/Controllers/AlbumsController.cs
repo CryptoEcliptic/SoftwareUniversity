@@ -36,7 +36,7 @@
                     int number = 1;
                     foreach (var album in albums)
                     {
-                        var albumHtml = $"<tr><th>{number++}.</th><th><a href=\"/albums/details?id={album.Id}\" style=\"color: black\">{album.Name}</a></th></tr>";
+                        var albumHtml = $"<tr><th>{number++}.</th><th><a href=\"/albums/details?id={album.Id}\" style=\"color: black\">{album.Name}</a></th><th>{album.AdditionDate.ToString("dd-MM-yyyy")}</th><th>{album.Tracks.Count}</th></tr>";
                         albumsHtml.Append(albumHtml);
                     }
                 }
@@ -64,7 +64,7 @@
                 return new RedirectResult("/users/login");
             }
 
-            var albumName = request.FormData["name"].ToString().Trim().Replace("+", " ");
+            var albumName = HttpUtility.UrlDecode(request.FormData["name"].ToString().Trim().Replace("+", " "));
             var coverPhotoUrl = request.FormData["cover"].ToString().Trim();
             var decodedUrl = HttpUtility.UrlDecode(coverPhotoUrl);
 
@@ -82,7 +82,8 @@
             var album = new Album
             {
                 Name = albumName,
-                Cover = decodedUrl,         
+                Cover = decodedUrl,
+                AdditionDate = DateTime.UtcNow,
             };
 
             try
