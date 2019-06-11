@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\csharp-web-master\csharp-web-master\2019-May-Season\SoftUni-Information-Services\src\SIS.WebServer\SIS.MvcFramework.csproj" />
     <ProjectReference Include="..\SIS.HTTP\SIS.HTTP.csproj" />
     <ProjectReference Include="..\SIS.WebServer\SIS.WebServer.csproj" />
   </ItemGroup>
@@ -75,7 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="StartUp.cs">
+    <Compile Update="Startup.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
