@@ -1,7 +1,4 @@
 ﻿using SIS.MvcFramework.Attributes.Validation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Panda.Web.ViewModels.Users
 {
@@ -14,6 +11,7 @@ namespace Panda.Web.ViewModels.Users
         [RequiredSis]
         public string Password { get; set; }
 
+        [RequiredSis]
         public string ConfirmPassword { get; set; }
 
 

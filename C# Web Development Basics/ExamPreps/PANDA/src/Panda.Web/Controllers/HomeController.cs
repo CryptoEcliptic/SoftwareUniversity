@@ -1,9 +1,6 @@
 ﻿using SIS.MvcFramework;
 using SIS.MvcFramework.Attributes;
 using SIS.MvcFramework.Result;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Panda.Web.Controllers
 {

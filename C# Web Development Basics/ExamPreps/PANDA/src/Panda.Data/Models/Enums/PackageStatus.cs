@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Panda.Data.Models.Enums
+﻿namespace Panda.Data.Models.Enums
 {
     public enum PackageStatus
     {

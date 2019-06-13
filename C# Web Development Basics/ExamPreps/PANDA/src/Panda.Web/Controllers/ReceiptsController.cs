@@ -3,10 +3,7 @@ using Panda.Web.ViewModels.Receipts;
 using SIS.MvcFramework;
 using SIS.MvcFramework.Attributes.Security;
 using SIS.MvcFramework.Result;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Panda.Web.Controllers
 {

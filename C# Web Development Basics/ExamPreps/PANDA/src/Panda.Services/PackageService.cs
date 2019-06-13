@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Panda.Data;
+﻿using Panda.Data;
 using Panda.Data.Models;
 using Panda.Data.Models.Enums;
+using System.Linq;
 
 namespace Panda.Services
 {
@@ -19,13 +16,13 @@ namespace Panda.Services
             this.receiptService = receiptService;
         }
 
-        public Package CreatePackage(string description, decimal weight, string shippingAddress, string username)
+        public bool CreatePackage(string description, decimal weight, string shippingAddress, string username)
         {
             var recipient = this.context.Users.FirstOrDefault(x => x.Username == username);
 
             if (recipient == null)
             {
-                return null;
+                return false;
             }
 
             var package = new Package
@@ -40,7 +37,7 @@ namespace Panda.Services
             context.Packages.Add(package);
             context.SaveChanges();
 
-            return package;
+            return true;
         }
 
         

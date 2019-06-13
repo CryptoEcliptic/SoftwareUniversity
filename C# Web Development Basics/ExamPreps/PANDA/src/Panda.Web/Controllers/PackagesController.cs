@@ -4,10 +4,7 @@ using SIS.MvcFramework;
 using SIS.MvcFramework.Attributes;
 using SIS.MvcFramework.Attributes.Security;
 using SIS.MvcFramework.Result;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Panda.Web.Controllers
 {
@@ -16,7 +13,6 @@ namespace Panda.Web.Controllers
         private readonly IUsersService userService;
         private readonly IPackageService packageService;
 
-        [Authorize]
         public PackagesController(IUsersService userService, IPackageService packageService)
         {
             this.userService = userService;
@@ -40,9 +36,7 @@ namespace Panda.Web.Controllers
                 return this.Redirect("/Packages/Create");
             }
 
-            var package = this.packageService.CreatePackage(model.Description, model.Weight, model.ShippingAddress, model.RecipientName);
-
-            if (package == null)
+            if(!this.packageService.CreatePackage(model.Description, model.Weight, model.ShippingAddress, model.RecipientName))
             {
                 return this.Redirect("/Packages/Create");
             }

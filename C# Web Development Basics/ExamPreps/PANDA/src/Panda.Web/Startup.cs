@@ -1,11 +1,7 @@
 ﻿using Panda.Data;
 using Panda.Services;
 using SIS.MvcFramework;
-using SIS.MvcFramework.DependencyContainer;
 using SIS.MvcFramework.Routing;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Panda.Web
 {
