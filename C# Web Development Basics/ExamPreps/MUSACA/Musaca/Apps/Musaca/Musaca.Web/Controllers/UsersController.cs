@@ -76,7 +76,7 @@ namespace Musaca.Web.Controllers
                     Id = x.Id,
                     Cashier = x.Cashier.Username,
                     IssuedOn = x.IssuedOn.ToString("dd/MM/yyyy"),
-                    Total = x.Products.Sum(p => p.Price),
+                    Total = x.OrdersProducts.Sum(p => p.Product.Price),
                 })
                 .ToList();
 

@@ -30,8 +30,8 @@ namespace Musaca.Web.Controllers
                 var products = this.productsService.GetAllProductsFromCurrentOrder(this.User.Id)
                     .Select(x => new OrderedProductsViewModel
                     {
-                        Name = x.Name,
-                        Price = x.Price,
+                        Name = x.Product.Name,
+                        Price = x.Product.Price,
                     })
                     .ToList();
                 var sum = products.Sum(x => x.Price);

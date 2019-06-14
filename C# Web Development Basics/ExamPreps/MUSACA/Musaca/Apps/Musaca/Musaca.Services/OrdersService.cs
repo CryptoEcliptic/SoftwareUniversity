@@ -48,7 +48,7 @@ namespace Musaca.Services
             var order = this.context.Orders.FirstOrDefault(x => x.Status == OrderStatus.Active 
             && x.CashierId == userId);
 
-            product.OrderId = order.Id;
+            order.OrdersProducts.Add(new OrdersProducts {  ProductId = product.Id }); //TODO Check
 
             this.context.Update(product);
             this.context.SaveChanges();

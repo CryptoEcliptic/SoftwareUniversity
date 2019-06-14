@@ -14,6 +14,6 @@ namespace Musaca.Services
 
         Product GetByName(string name);
 
-        IQueryable<Product> GetAllProductsFromCurrentOrder(string userId);
+        IQueryable<OrdersProducts> GetAllProductsFromCurrentOrder(string userId);
     }
 }

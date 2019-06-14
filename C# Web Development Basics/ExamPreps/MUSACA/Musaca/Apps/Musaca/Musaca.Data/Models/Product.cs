@@ -10,6 +10,7 @@ namespace Musaca.Data.Models
         public Product()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.OrdersProducts = new List<OrdersProducts>();
         }
         public string Id { get; set; }
 
@@ -19,8 +20,7 @@ namespace Musaca.Data.Models
 
         public decimal Price { get; set; }
 
-        public string OrderId { get; set; }
-        public Order Order { get; set; }
+        public ICollection<OrdersProducts> OrdersProducts { get; set; }
 
     }
 }

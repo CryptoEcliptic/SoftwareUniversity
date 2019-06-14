@@ -10,7 +10,7 @@ namespace Musaca.Data.Models
     {
         public Order()
         {
-            this.Products = new HashSet<Product>();
+            this.OrdersProducts = new HashSet<OrdersProducts>();
             this.Id = Guid.NewGuid().ToString();
         }
         public string Id { get; set; }
@@ -23,7 +23,7 @@ namespace Musaca.Data.Models
         public string CashierId { get; set; }
         public User Cashier { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public ICollection<OrdersProducts> OrdersProducts { get; set; }
 
     }
 }

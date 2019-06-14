@@ -43,14 +43,16 @@ namespace Musaca.Services
             return product;
         }
 
-        public IQueryable<Product> GetAllProductsFromCurrentOrder(string userId)
+        public IQueryable<OrdersProducts> GetAllProductsFromCurrentOrder(string userId)
         {
             var user = this.usersService.GetById(userId);
             var order = context.Orders.FirstOrDefault(x => x.CashierId == user.Id && x.Status == OrderStatus.Active);
 
-            var products = this.context.Products.Where(x => x.OrderId == order.Id);
+            var orderedProducts = this.context.OrdersProducts.Where(x => x.OrderId == order.Id);
 
-            return products;
+            var products = this.context.Products.Where(x => x.OrdersProducts == orderedProducts);
+
+            return orderedProducts;
         }
     }
 }
