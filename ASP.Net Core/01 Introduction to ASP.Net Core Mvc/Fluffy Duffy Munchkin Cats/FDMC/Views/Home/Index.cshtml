@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model FDMC.Models.Cats.AllCatsViewModel
+
+    <div class="text-center">
+        <h1 class="display-4">Fluffy Duffy Munchkin Cats (FDMC)</h1>
+        <br />
+        <ul>
+            @foreach (var cat in Model.Cats)
+            {
+                <li><a href="/Cats/Details/@cat.Id">@cat.Name</a></li>
+            }
+        </ul>
+        <br />
+
+        <form action="/Cats/Create">
+            <input type="submit" value="Add Cat" />
+        </form>
+    </div>

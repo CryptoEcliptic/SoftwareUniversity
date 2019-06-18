@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FDMC", "FDMC\FDMC.csproj", "{727249B3-1B26-49FC-8812-F483F2B5CB10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{727249B3-1B26-49FC-8812-F483F2B5CB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{727249B3-1B26-49FC-8812-F483F2B5CB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{727249B3-1B26-49FC-8812-F483F2B5CB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{727249B3-1B26-49FC-8812-F483F2B5CB10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8EC56736-CD84-48CE-AC20-A85D10CCC758}
+	EndGlobalSection
+EndGlobal
