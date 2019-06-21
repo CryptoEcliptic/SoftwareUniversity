@@ -43,7 +43,7 @@ namespace FDMC.Controllers
         }
 
         // GET: Cats/Create
-        public IActionResult Create()
+        public IActionResult Add()
         {
             return View();
         }
@@ -53,7 +53,7 @@ namespace FDMC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Age,Breed,ImageUrl")] Cat cat)
+        public async Task<IActionResult> Add([Bind("Id,Name,Age,Breed,ImageUrl")] Cat cat)
         {
             if (ModelState.IsValid)
             {
