@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panda.App", "Panda.App\Panda.App.csproj", "{264AFE6B-C248-4806-851D-0EB0C0B86045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panda.Data", "Panda.Data\Panda.Data.csproj", "{38CD14B3-42DD-4A0A-8CB5-DEAB9012CD2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panda.Domain", "Panda.Domain\Panda.Domain.csproj", "{7F849DDC-8A27-4735-94DB-E317931999DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panda.Services", "Panda.Services\Panda.Services.csproj", "{A59B9725-8F54-4958-B56F-D5F93DD396A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{264AFE6B-C248-4806-851D-0EB0C0B86045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{264AFE6B-C248-4806-851D-0EB0C0B86045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{264AFE6B-C248-4806-851D-0EB0C0B86045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{264AFE6B-C248-4806-851D-0EB0C0B86045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38CD14B3-42DD-4A0A-8CB5-DEAB9012CD2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38CD14B3-42DD-4A0A-8CB5-DEAB9012CD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38CD14B3-42DD-4A0A-8CB5-DEAB9012CD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38CD14B3-42DD-4A0A-8CB5-DEAB9012CD2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F849DDC-8A27-4735-94DB-E317931999DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F849DDC-8A27-4735-94DB-E317931999DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F849DDC-8A27-4735-94DB-E317931999DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F849DDC-8A27-4735-94DB-E317931999DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A59B9725-8F54-4958-B56F-D5F93DD396A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A59B9725-8F54-4958-B56F-D5F93DD396A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A59B9725-8F54-4958-B56F-D5F93DD396A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A59B9725-8F54-4958-B56F-D5F93DD396A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01354085-AE45-479C-A208-CAEA206767B0}
+	EndGlobalSection
+EndGlobal
