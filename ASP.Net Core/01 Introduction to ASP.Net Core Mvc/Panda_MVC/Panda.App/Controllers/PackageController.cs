@@ -11,6 +11,7 @@ namespace Panda.App.Controllers
 {
     public class PackageController : Controller
     {
+        private const decimal priceIndex = 2.67m;
         private readonly PandaDbContext context;
         private static readonly Random getrandom = new Random();
 
@@ -19,7 +20,9 @@ namespace Panda.App.Controllers
             this.context = context;
         }
 
-        [Authorize]
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             this.ViewData["Recipients"] = this.context.Users.ToList();
@@ -27,7 +30,7 @@ namespace Panda.App.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(PackageCreateBindingModel bindingModel)
         {
             var recipient = this.context.Users.FirstOrDefault(x => x.UserName == bindingModel.Recipient);
@@ -48,6 +51,7 @@ namespace Panda.App.Controllers
 
         }
 
+        [HttpGet]
         [Authorize]
         public IActionResult Details(int id)
         {
@@ -64,7 +68,7 @@ namespace Panda.App.Controllers
                 Weight = package.Weight,
                 Recipient = recipient.UserName,
                 Status = package.Status.ToString(),
-                Description = package.Description
+                Description = package.Description,
             };
  
             if (package.Status == PackageStatus.Pending)
@@ -73,7 +77,7 @@ namespace Panda.App.Controllers
             }
             else if (package.Status == PackageStatus.Shipped)
             {
-                detailsModel.EstimatedDeliveryDate = DateTime.UtcNow.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
+                detailsModel.EstimatedDeliveryDate = package.EstimatedDeliveryDate.Value.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
             }
             else
             {
@@ -83,7 +87,8 @@ namespace Panda.App.Controllers
             return this.View(detailsModel);
         }
 
-        [Authorize]
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Pending()
         {
             var pendingPackages = this.context.Packages
@@ -96,12 +101,14 @@ namespace Panda.App.Controllers
                     Weight = x.Weight,
                     Recipient = x.Recipient.UserName
                 })
+                .OrderBy(x => x.Id)
                 .ToList();
                ;
             return this.View( new PendingPackagesListViewModel { PendingPackages = pendingPackages });
         }
 
-        [Authorize]
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Shipped()
         {
             var shippedPackages = this.context.Packages
@@ -114,16 +121,18 @@ namespace Panda.App.Controllers
                     Weight = x.Weight,
                     Recipient = x.Recipient.UserName
                 })
+                .OrderBy(x => x.EstimatedDeliveryDate)
                 .ToList();
             ;
             return this.View(new ShippedPackageListViewModel { ShippedPackages = shippedPackages });
         }
 
-        [Authorize]
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delivered()
         {
             var deliveredPackages = this.context.Packages
-                .Where(x => x.Status == PackageStatus.Delivered)
+                .Where(x => x.Status == PackageStatus.Delivered || x.Status == PackageStatus.Acquired)
                 .Select(x => new DeliveredPackageViewModel
                 {
                     Id = x.Id,
@@ -132,13 +141,14 @@ namespace Panda.App.Controllers
                     Weight = x.Weight,
                     Recipient = x.Recipient.UserName
                 })
+                .OrderByDescending(x => x.Id)
                 .ToList();
             ;
             return this.View(new DeliveredPackageListViewModel { DeliveredPackages = deliveredPackages });
         }
 
-
-        [Authorize]
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Ship(int id)
         {
             var packageToShip = this.context.Packages.FirstOrDefault(x => x.Id == id);
@@ -150,7 +160,8 @@ namespace Panda.App.Controllers
             return this.Redirect("/Package/Pending");
         }
 
-        [Authorize]
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Deliver(int id)
         {
             var packageToDeliver = this.context.Packages.FirstOrDefault(x => x.Id == id);
@@ -160,6 +171,30 @@ namespace Panda.App.Controllers
             this.context.SaveChanges();
 
             return this.Redirect("/Package/Shipped");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Acquire(int id)
+        {
+            var packageToAcquire = this.context.Packages.FirstOrDefault(x => x.Id == id);
+            packageToAcquire.Status = PackageStatus.Acquired;
+            this.context.Update(packageToAcquire);
+            this.context.SaveChanges();
+            var user = this.context.Users.FirstOrDefault(x => x.UserName == this.User.Identity.Name);
+
+
+            var receipt = new Receipt
+            {
+                Fee = packageToAcquire.Weight * priceIndex,
+                IssuedOn = DateTime.UtcNow,
+                Package = packageToAcquire,
+                Recipient = (PandaUser)user,
+            };
+
+            this.context.Receipts.Add(receipt);
+            this.context.SaveChanges();
+            return this.Redirect("/Home/Index");
         }
 
         [NonAction]

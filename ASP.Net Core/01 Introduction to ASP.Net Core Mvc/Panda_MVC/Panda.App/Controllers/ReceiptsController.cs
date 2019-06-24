@@ -24,7 +24,7 @@ namespace Panda.App.Controllers
         public IActionResult My()
         {
             var usersReceipts = this.context.Receipts
-                .Where(x => x.Recipient == this.User.Identity)
+                .Where(x => x.Recipient.UserName == this.User.Identity.Name)
                 .Select(x => new ReceiptIndexViewModel {
                     Id = x.Id,
                     Fee = x.Fee,
@@ -42,7 +42,9 @@ namespace Panda.App.Controllers
             var receipt = this.context.Receipts.FirstOrDefault(x => x.Id == id);
             var package = this.context.Packages
                 .Include(x => x.Receipt)
+                .ThenInclude(x => x.Recipient)
                 .FirstOrDefault(x => x.Receipt.Id == id);
+            //var recipient = this.context.Users.FirstOrDefault(x => x.Id == package.RecipientId);
             if (receipt != null && package != null)
             {
                 var detailsModel = new ReceiptDetailsViewModel
