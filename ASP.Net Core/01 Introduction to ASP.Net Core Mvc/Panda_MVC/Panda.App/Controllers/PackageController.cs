@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Panda.App.Data;
 using Panda.App.Domains;
 using Panda.App.Models.Package;
+using Panda.App.Services;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -13,11 +14,13 @@ namespace Panda.App.Controllers
     {
         private const decimal priceIndex = 2.67m;
         private readonly PandaDbContext context;
+        private readonly IPackageService packageService;
         private static readonly Random getrandom = new Random();
 
-        public PackageController(PandaDbContext context)
+        public PackageController(PandaDbContext context, IPackageService packageService)
         {
             this.context = context;
+            this.packageService = packageService;
         }
 
 
@@ -33,19 +36,17 @@ namespace Panda.App.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create(PackageCreateBindingModel bindingModel)
         {
-            var recipient = this.context.Users.FirstOrDefault(x => x.UserName == bindingModel.Recipient);
-            var package = new Package
+            if (!this.ModelState.IsValid)
             {
-                Description = bindingModel.Description,
-                Weight = bindingModel.Weight,
-                ShippingAddress = bindingModel.ShippingAddress,
-                Status = PackageStatus.Pending,
-                Recipient = (PandaUser)recipient,
-                EstimatedDeliveryDate = null
-            };
+                return this.Redirect("/Package/Create");
+            }
 
-            this.context.Packages.Add(package);
-            this.context.SaveChanges();
+            var isPackageCreated = this.packageService.CreatePackage(bindingModel);
+
+            if (!isPackageCreated)
+            {
+                return this.Redirect("/Package/Create");
+            }
 
             return this.Redirect("/Package/Pending");
 

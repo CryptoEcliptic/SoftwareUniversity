@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Panda.App.Data;
 using Panda.App.Domains;
+using Panda.App.Services;
 using System;
 using System.Linq;
 
@@ -76,6 +77,7 @@ namespace Panda.App
             services.AddDbContext<PandaDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<IPackageService, PackageService>();
 
         }
 
