@@ -11,56 +11,111 @@
         <h3 class="text-white"><a href="/Identity/Account/Register">Register</a> if you don't.</h3>
     </div>
 }
+
 else
 {
-    <h1 class="text-center">Hello, @User.Identity.Name!</h1>
-    <hr class="hr-2 bg-panda">
-    <div class="d-flex justify-content-between">
-        <div class="w-25 bg-white">
-            <h2 class="text-center">Pending</h2>
-            <div class="border-panda p-3">
-                @foreach (var pending in (List<Package>)this.ViewData["Pending"])
-                {
-                    if (pending != null)
+    if (User.IsInRole("User"))
+    {
+        <h1 class="text-center">Hello, @User.Identity.Name!</h1>
+        <hr class="hr-2 bg-panda">
+        <div class="d-flex justify-content-between">
+            <div class="w-25 bg-white">
+                <h2 class="text-center">Pending</h2>
+                <div class="border-panda p-3">
+                    @foreach (var pending in (List<Package>)this.ViewData["Pending"])
                     {
-                        <div class="p-2 d-flex justify-content-around">
-                            <h4 class="w-75">@pending.Description</h4>
-                            <a href="/Package/Details/@pending.Id" class="btn bg-panda text-white w-25">Details</a>
-                        </div>
+                        if (pending != null)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@pending.Description</h4>
+                                <a href="/Package/Details/@pending.Id" class="btn bg-panda text-white w-25">Details</a>
+                            </div>
+                        }
                     }
-                }
+                </div>
+            </div>
+            <div class="w-25 bg-white">
+                <h2 class="text-center">Shipped</h2>
+                <div class="border-panda p-3">
+                    @foreach (var shipped in (List<Package>)this.ViewData["Shipped"])
+                    {
+                        if (shipped != null)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@shipped.Description</h4>
+                                <a href="/Package/Details/@shipped.Id" class="btn bg-panda text-white w-25">Details</a>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="w-25 bg-white">
+                <h2 class="text-center">Delivered</h2>
+                <div class="border-panda p-3">
+                    @foreach (var delivered in (List<Package>)this.ViewData["Delivered"])
+                    {
+                        if (delivered != null)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@delivered.Description</h4>
+                                <a href="/Package/Acquire/@delivered.Id" class="btn bg-panda text-white w-25">Acquire</a>
+                            </div>
+                        }
+                    }
+                </div>
             </div>
         </div>
-        <div class="w-25 bg-white">
-            <h2 class="text-center">Shipped</h2>
-            <div class="border-panda p-3">
-                @foreach (var shipped in (List<Package>)this.ViewData["Shipped"])
-                {
-                    if (shipped != null)
+    }
+    if (User.IsInRole("Admin"))
+    {
+        <h1 class="text-center">Hello, Administrator @User.Identity.Name!</h1>
+        <hr class="hr-2 bg-panda">
+        <div class="d-flex justify-content-between">
+            <div class="w-25 bg-white">
+                <h2 class="text-center">Pending</h2>
+                <div class="border-panda p-3">
+                    @foreach (var pending in (List<Package>)this.ViewData["Pending"])
                     {
-                    <div class="p-2 d-flex justify-content-around">
-                        <h4 class="w-75">@shipped.Description</h4>
-                        <a href="/Package/Details/@shipped.Id" class="btn bg-panda text-white w-25">Details</a>
-                    </div>
+                        if (pending != null)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@pending.Description</h4>
+                                <a href="/Package/Details/@pending.Id" class="btn bg-panda text-white w-25">Details</a>
+                            </div>
+                        }
                     }
-                }
+                </div>
+            </div>
+            <div class="w-25 bg-white">
+                <h2 class="text-center">Shipped</h2>
+                <div class="border-panda p-3">
+                    @foreach (var shipped in (List<Package>)this.ViewData["Shipped"])
+                    {
+                        if (shipped != null)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@shipped.Description</h4>
+                                <a href="/Package/Details/@shipped.Id" class="btn bg-panda text-white w-25">Details</a>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="w-25 bg-white">
+                <h2 class="text-center">Delivered</h2>
+                <div class="border-panda p-3">
+                    @foreach (var delivered in (List<Package>)this.ViewData["Delivered"])
+                    {
+                        if (delivered != null)
+                        {
+                            <div class="p-2 d-flex justify-content-around">
+                                <h4 class="w-75">@delivered.Description</h4>
+                                <a href="/Package/Acquire/@delivered.Id" class="btn bg-panda text-white w-25">Acquire</a>
+                            </div>
+                        }
+                    }
+                </div>
             </div>
         </div>
-        <div class="w-25 bg-white">
-            <h2 class="text-center">Delivered</h2>  
-            <div class="border-panda p-3">
-                @foreach (var delivered in (List<Package>)this.ViewData["Delivered"])
-                {
-                    if (delivered != null)
-                    {
-                        <div class="p-2 d-flex justify-content-around">
-                            <h4 class="w-75">@delivered.Description</h4>
-                            <a href="/Package/Details/@delivered.Id" class="btn bg-panda text-white w-25">Details</a>
-                        </div>
-                    }
-
-                }
-            </div>
-        </div>
-    </div>
+    }
 }

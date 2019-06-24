@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Panda.App.Data;
 using Panda.App.Domains;
 using Panda.App.Models.Package;
+using System;
+using System.Globalization;
+using System.Linq;
 
 namespace Panda.App.Controllers
 {
@@ -163,7 +159,7 @@ namespace Panda.App.Controllers
             this.context.Update(packageToDeliver);
             this.context.SaveChanges();
 
-            return this.Redirect("/Package/Pending");
+            return this.Redirect("/Package/Shipped");
         }
 
         [NonAction]
@@ -174,6 +170,5 @@ namespace Panda.App.Controllers
                 return getrandom.Next(min, max);
             }
         }
-
     }
 }
